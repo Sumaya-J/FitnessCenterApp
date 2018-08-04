@@ -20,6 +20,12 @@ namespace FitnessCenterApp.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Member> MemberDbSet { get; set; }
+        public DbSet<Service> ServiceDbSet { get; set; }
+        //public DbSet<MemberService> MemberServiceDbSet { get; set; }
+        public DbSet<MembershipType> MembershipTypeDbSet { get; set; }
+        public DbSet<Invoice> InvoiceDbSet { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

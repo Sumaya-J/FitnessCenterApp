@@ -1,0 +1,9 @@
+﻿@model FitnessCenterApp.ViewModels.ServiceCheckBoxVM
+<div class="checkbox">
+    <label>
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Name)
+        @Html.EditorFor(model => model.IsSelected)
+        @Html.LabelFor(model => model.IsSelected, Model.Name)
+    </label>
+</div>

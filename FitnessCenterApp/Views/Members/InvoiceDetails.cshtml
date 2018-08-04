@@ -1,0 +1,74 @@
+﻿@model FitnessCenterApp.ViewModels.InvoiceVM
+@{
+    ViewBag.Title = "InvoiceDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="invoice-title">
+                <h3><span>@Model.BillToName</span> Invoice</h3>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <address>
+                        <strong>Membership Type: </strong>
+                        <span>@Model.MembershipTypeName</span> <span class="label label-warning">@Model.MembershipTypeDuration @(Model.MembershipTypeName == "Pay As You Go" ? "Day" : "Days")</span><br>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Order Summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Service</strong></td>
+                                    <td class="text-center"><strong>Fee (AED)</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Services)
+                                {
+                                    if (item.IsSelected)
+                                    {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            <td class="text-center">@item.Fee</td>
+                                        </tr>
+                                    }
+                                }
+
+                                <tr>
+                                    <td class="thick-line text-right"><strong>Subtotal</strong></td>
+                                    <td class="thick-line text-center">
+                                        @Model.SubTotal
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line text-right"><strong>Discount Rate (%)</strong></td>
+                                    <td class="no-line text-center">@Model.MembershipTypeDiscount</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line text-right"><strong>Total</strong></td>
+                                    <td class="no-line text-center">@Model.Total</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FitnessCenterApp.Models.Member>
+@{
+    ViewBag.Title = "Members";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Members List</h3>
+
+<p>
+    @Html.ActionLink("Add New Member", "NewMember", "Members", null, new { @class = "btn btn-primary" })
+</p>
+<table id="members" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JoiningDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MembershipType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Services)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JoiningDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MembershipType.Name)
+                </td>
+                <td>
+                    @foreach (var modelItem in item.Services)
+                    {
+                        <span class="label label-primary">@modelItem.Name</span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Invoice", "InvoiceDetails", "Members", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#members").DataTable();
+        })
+    </script>
+}
